@@ -19,8 +19,14 @@ const {
 
 const catchErrow = async (ctx, next) => {
     try {
+        // 如果不报错就直接next()
         await next()
     } catch (error) {
+        // 开发环境 生产环境
+        if (global.config.environment === 'dev') {
+            throw error
+        }
+        // 判断errow是否是HttpException类型
         if (error instanceof HttpException) {
             ctx.body = {
                 msg: error.msg,
@@ -30,7 +36,9 @@ const catchErrow = async (ctx, next) => {
             ctx.status = error.code
         } else {
             ctx.body = {
-                msg: 'we made a mistake'
+                msg: '出现了未知异常',
+                error_code: 999,
+                require: `${ctx.method} ${ctx.path}`
             }
         }
     }

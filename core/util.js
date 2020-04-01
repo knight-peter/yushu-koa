@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
 /***
- * 
+ *
  */
 const findMembers = function (instance, {
     prefix,
@@ -12,7 +12,7 @@ const findMembers = function (instance, {
         //基线条件（跳出递归）
         if (instance.__proto__ === null)
             return []
-
+        // 返回一个由目标对象instance自身的属性键组成的数组
         let names = Reflect.ownKeys(instance)
         names = names.filter((name) => {
             // 过滤掉不满足条件的属性或方法名
@@ -29,6 +29,7 @@ const findMembers = function (instance, {
             }
         }
         if (prefix)
+            // startsWith() 方法用来判断当前字符串是否以另外一个给定的子字符串开头，并根据判断结果返回 true 或 false。
             if (value.startsWith(prefix))
                 return true
         if (specifiedType)

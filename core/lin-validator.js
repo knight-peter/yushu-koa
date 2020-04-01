@@ -9,10 +9,10 @@ const {
     ParameterException
 } = require('./http-exception')
 const {
-    get,
-    last,
-    set,
-    cloneDeep
+    get, // 根据 object对象的path路径获取值
+    last, // 获取array中的最后一个元素。
+    set, // 设置 object对象中对应 path 属性路径上的值，如果path不存在，则创建。 缺少的索引属性会创建为数组，而缺少的属性会创建为对象。
+    cloneDeep // 深拷贝
 } = require("lodash")
 const {
     findMembers
